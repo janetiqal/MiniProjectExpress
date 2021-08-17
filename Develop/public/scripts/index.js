@@ -103,6 +103,7 @@ const validateTip = (newTip) => {
   }
 
   const result = {
+    //!! turns a truthy falsy statement into strictly boolean 
     isValid: !!(utest && tipContentCheck && topicCheck),
     errors: errorState,
   };
@@ -124,10 +125,26 @@ const showErrors = (errorObj) => {
 // Helper function to send a POST request to the diagnostics route (/api/diagnostics)
 const submitDiagnostics = (submissionObj) => {
   // TODO: your code here
+  fetch('http://localhost:3001/api'), {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json',
+    },
+    //the error isnt working, it isnt filling w the error reponse
+    //double check how rich did it in the video, aroun 955 pm
+    body: JSON.stringify(submissionObj.error)
+  }
   console.info(
     '⚠️ Create the logic for the fetch POST request in scripts/index.js'
-  );
-  alert('Add your logic to scripts/index.js');
+  )
+  .then((response) => response.json())
+  .then((data) => {
+    alert(data);
+    //he didnt call this function here either
+    // handleFormSubmit(e);
+  })
+
+  alert('Enter input in all the fields');
 };
 
 // Function to handle when a user submits the feedback form
